@@ -34,24 +34,24 @@ class CodigosPostales extends Controller
             foreach ($codigo as $k => $v) {
                 $cont++;
 
-                $locality = $v->D_mnpio;
+                $locality = $v->d_ciudad;
                 $federal = [
-                    'key' => $cont,
+                    'key' => (int)$v->c_estado,
                     'name' => $v->d_estado,
                     'code' => ($v->c_CP) ? $v->c_CP : null
                 ];
 
                 $settlements[] = [
-                    "key" => $cont,
+                    "key" => (int)$v->id_asenta_cpcons,
                     "name" => $v->d_asenta,
                     "zone_type" => $v->d_zona,
                     "settlement_type" => [
-                        "name" => $v->d_tipo_asenta
+                        "name" => ucfirst(strtolower($v->d_tipo_asenta))
                     ]
                 ];
 
                 $municipality = [
-                    "key" => $v->c_mnpio,
+                    "key" => (int) $v->c_mnpio,
                     "name" => $v->d_ciudad
                 ];
             }
